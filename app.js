@@ -6,6 +6,9 @@ const expressLayouts = require('express-ejs-layouts');
 const env = require('dotenv');
 const path = require('path');
 
+// DB
+const DB = require('./modules/database');
+
 const app = express();
 
 
@@ -19,13 +22,14 @@ app.use(express.urlencoded({ extended: false }));
 
 // Set templating engine
 app.use(expressLayouts);
-app.set('layout', './layouts/nobackground');
+app.set('layout', './layouts/mainLayout');
 // Set view engine
-app.set('views', path.join(__dirname, '/views'));
+// app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 
 // Modules
-const db = require('./modules/mockdb');
+// const db = require('./modules/mockdb');
+
 
 // Static files
 // app.use(express.static('public'));
@@ -38,33 +42,41 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
 
 // API
-app.get('/api/products', (req, res) => {
-    res.json(db.products);
+app.get('/api/test', async (req, res) => {
+    const data = await test.getProducts();
+    res.json(data);
 });
 
 
 // Navigation
+
 //root
 app.get('/', (req, res) => {
     res.render('index');
 });
+
 //shop
-app.get('/products', (req, res) => {
-    res.render('index');
-    //contact form 
+app.get('/products', async (req, res) => {
+    const products = await DB.getProducts();
+    res.render('products', { products: products });
 });
+
+//contact form 
 app.get('/contact', (req, res) => {
     res.render('index');
 });
+
 //about
 app.get('/about', (req, res) => {
     res.render('index');
 });
+
+
 //register
 app.get('/register', (req, res) => {
-    res.render('register', { title: 'Register', layout: './layouts/background' });
+    res.render('register', { title: 'Register', layout: './layouts/backgroundColor' });
 });
-app.post('/register', (req, res) => { //async
+app.post('/register', (req, res) => {
     const saltRounds = 10;
     bcrypt.hash(req.body.password, saltRounds).then(function (hash) {
         // Store hash in your password DB
@@ -80,23 +92,11 @@ app.post('/register', (req, res) => { //async
 
     res.redirect('/register');
 });
-// try {
-//     const hashedPass = await bcrypt.hash(req.body.password, saltRounds);
-//     users.push({
-//         id: Date.now().toString(),
-//         name: req.body.name,
-//         email: req.body.email,
-//         password: hashedPass
-//     })
-//     res.redirect('/login');
-// } catch {
-//     res.redirect('/register');
-// }
 
 
 //login
 app.get('/login', (req, res) => {
-    res.render('login', { title: 'Login', layout: './layouts/background' });
+    res.render('login', { title: 'Login', layout: './layouts/backgroundColor' });
 });
 
 

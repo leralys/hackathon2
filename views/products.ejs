@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <div class="my-grid">
+    <% products.forEach(el=>{ %>
+    <div class="card">
+      <img src="/assets/products/id<%=el.product_id%>.jpeg" class="card-img-top" alt="<%=el.product_name%>">
+      <div class="card-body flex-column d-flex justify-content-between">
+        <div class="mb-3">
+          <h5 class="card-title"><%=el.product_name%><span class="ms-3">&#8362;<%=el.price%></span></h5>
+          <p class="card-text"><%=el.description%></p>
+        </div>
+        <a href="#" class="btn btn-info text-nowrap rounded-pill">Add to a cart</a>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</div>
+
+<!-- style="width: 18rem; -->
