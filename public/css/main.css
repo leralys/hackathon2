@@ -1,0 +1,17 @@
+:root {
+  --color-white: #fff;
+  --color-pale: #f0ffff;
+  --color-pink-light: #e99ed4;
+  --color-pink-middle: #e074c1;
+  --color-pink-dark: #d74aae;
+  --color-light-green: #06a89b;
+  --color-dark-green: #037d73;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
