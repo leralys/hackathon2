@@ -1,0 +1,13 @@
+h1 {
+  color: var(--color-green-pale);
+  text-align: center;
+  margin-top: 50px;
+}
+body {
+  background-color: var(--color-green-dark);
+}
+
+form {
+  background-color: var(--color-white);
+  border-radius: 2em;
+}

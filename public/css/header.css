@@ -1,0 +1,7 @@
+nav.navbar-light {
+  background: var(--color-white);
+}
+svg.icon,
+div.container-fluid a.navbar-brand {
+  color: var(--color-pink-dark);
+}
