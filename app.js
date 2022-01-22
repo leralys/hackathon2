@@ -47,18 +47,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //root
 app.get('/', (req, res) => {
-    if (!req.session.user_id) {
-        res.render('index', { topButton: 'View account' });
-    } else {
-        res.render('index', { topButton: 'Login' });
-    }
+    let btnVal;
+    req.session.user_id ? btnVal = 'View account' : btnVal = 'Login';
+    res.render('index', { topButton: btnVal });
 });
 
 //shop
 app.get('/products', async (req, res) => {
     try {
         const products = await DB.getProducts();
-        res.render('products', { products: products });
+        let btnVal;
+        req.session.user_id ? btnVal = 'View account' : btnVal = 'Login';
+        res.render('products', { products: products, topButton: btnVal });
     } catch (e) {
         console.log(e);
     }
@@ -66,18 +66,18 @@ app.get('/products', async (req, res) => {
 
 //contact form 
 app.get('/contact', (req, res) => {
-    res.render('index');
+    res.redirect('/');
 });
 
 //about
 app.get('/about', (req, res) => {
-    res.render('index');
+    res.redirect('/');
 });
 
 
 //register
 app.get('/register', (req, res) => {
-    res.render('register', { title: 'Register', layout: './layouts/backgroundColor' });
+    res.render('register', { title: 'Register', layout: './layouts/backgroundColor', topButton: 'Login' });
 });
 app.post('/register', (req, res) => {
     const saltRounds = 10;
@@ -94,7 +94,7 @@ app.post('/register', (req, res) => {
 
 //login
 app.get('/login', (req, res) => {
-    res.render('login', { title: 'Login', layout: './layouts/backgroundColor' });
+    res.render('login', { title: 'Login', layout: './layouts/backgroundColor', topButton: 'Login' });
 });
 app.post('/login', async (req, res) => {
     const user = await DB.getUser(req.body.email);
@@ -125,7 +125,7 @@ app.get('/secret', (req, res) => {
     if (!req.session.user_id) {
         res.redirect('/login');
     } else {
-        res.render('secret', { layout: './layouts/backgroundColor' });
+        res.render('secret', { layout: './layouts/backgroundColor', topButton: 'View account' });
     }
 });
 app.post('/secret', (req, res) => {
