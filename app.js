@@ -16,6 +16,8 @@ const app = express();
 env.config();
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
+
+// session
 app.use(session({
     secret: 'notagoodsecret',
     resave: true,
@@ -111,13 +113,15 @@ app.post('/login', async (req, res) => {
 
 // logout
 app.post('/logout', (req, res) => {
-    req.session.user_id = null;
+    req.session.destroy();
     res.redirect('/');
 });
 
 //cart
 app.get('/cart', (req, res) => {
-    res.send('cart');
+    let btnVal;
+    req.session.user_id ? btnVal = 'View account' : btnVal = 'Login';
+    res.render('cart', { topButton: btnVal });
 });
 
 //secret

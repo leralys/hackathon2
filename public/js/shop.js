@@ -6,9 +6,11 @@ let cart;
 
 //product class to save to the cart
 class Product {
-    constructor(name, quantity) {
+    constructor(id, name, quantity, src) {
+        this.product_id = id;
         this.product_name = name;
         this.quantity = quantity;
+        this.src = src;
     }
 }
 
@@ -38,21 +40,24 @@ const checkLocalStorage = () => {
 }
 
 // resets inputs
-function resetInputs() {
-    const clearInputs = document.querySelectorAll('.reset-me');
-    clearInputs.forEach(el => el.value = '1');
-}
+// function resetInputs() {
+//     const clearInputs = document.querySelectorAll('.reset-me');
+//     clearInputs.forEach(el => el.value = '1');
+// }
 
 // saves product to a local storage
 const addToLocalCart = function (e) {
     e.preventDefault();
     let str = this.children[0].children[0].innerText;
+    let id = this.children[0].children[0].id;
     let ind = str.indexOf('₪');
     let quant = this.lastElementChild.children[0].children[1].value;
-    let product = new Product(str.slice(0, ind), quant);
+    let fullSrc = this.previousElementSibling.src;
+    let indexSrc = fullSrc.indexOf('/id');
+    let product = new Product(id, str.slice(0, ind), quant, fullSrc.slice(indexSrc));
     checkLocalStorage();
     cart.push(product);
-    resetInputs();
+    // resetInputs();
     localStorage.setItem('cart', JSON.stringify(cart));
 };
 

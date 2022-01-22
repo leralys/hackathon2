@@ -5,10 +5,12 @@
       <img src="/assets/products/id<%=el.product_id%>.jpeg" class="card-img-top" alt="<%=el.product_name%>">
       <form class="add-to-cart card-body flex-column d-flex justify-content-between">
         <div class="mb-3">
-          <h5 class="card-title product-name"><%=el.product_name%><span class="ms-3 price">&#8362;<%=el.price%></span></h5>
+          <h5 id="<%=el.product_id%>" class="card-title product-name"><%=el.product_name%>
+            <span class="ms-3 price">&#8362;<%=el.price%></span>
+          </h5>
           <p class="card-text"><%=el.description%></p>
         </div>
-        <div class="btn-toolbar" role="toolbar">
+        <div class="btn-toolbar">
           <span class="btn-group border rounded border-1 me-3" role="group">
             <button id="increase-quantity" type="button" class="btn">&#43</button>
             <input readonly id="quantity" class="border border-1 border-top-0 border-bottom-0 reset-me" type="number" name="quantity" value="1" min="1">
