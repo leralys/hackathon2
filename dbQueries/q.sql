@@ -21,3 +21,25 @@
 -- ('Holiday set', 65, 'Muffin jujubes jelly soufflé ice cream lollipop shortbread tiramisu chocolate');
 
 -- SELECT * FROM product
+
+
+
+-- CREATE TABLE customer (
+-- user_id SERIAL PRIMARY KEY NOT NULL,
+-- user_name VARCHAR(60) NOT NULL,
+-- user_pass VARCHAR(100) NOT NULL,
+-- email VARCHAR(50) NOT NULL
+-- );
+
+
+-- CREATE TABLE customer (
+-- customer_id SERIAL PRIMARY KEY NOT NULL,
+-- customer_name VARCHAR(60) NOT NULL,
+-- hashed_pass VARCHAR(100) NOT NULL,
+-- email VARCHAR(50) NOT NULL
+-- );
+
+-- INSERT INTO customer(customer_name, hashed_pass, email)
+-- VALUES 
+-- ('Blueberry pie', '$2b$10$VcXAr33wvA0KqyhvfkVHBOWqQ58BUHvih/mNv2UrJ.QguagcMsWGa', '1@1'),
+-- ('Spicy pumpkin', '$2b$10$L9d.ldIsLeSulPcJAae42eCItA2G5CWfKF1hrchaOsr5p2nHJXoHm', 'w@w')
