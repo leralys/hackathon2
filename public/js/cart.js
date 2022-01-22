@@ -1,3 +1,5 @@
+let myCart;
+
 // increase number of products
 const increaseQuant = function () {
     let numBox = this.nextElementSibling;
@@ -14,36 +16,55 @@ const decreaseQuant = function () {
     numBox.value = num;
 }
 
+//delete product from the cart
+function deleteItem() {
+    let card = this.parentElement.parentElement.parentElement;
+    myCart = myCart.filter(obj => obj.product_id != card.id);
+    card.remove();
+    localStorage.setItem('cart', JSON.stringify(myCart));
+}
+
+//deletes all tasks
+function deleteAll() {
+    let productCards = document.querySelectorAll('.card');
+    productCards.forEach(el => el.remove());
+    localStorage.clear();
+    document.querySelector('#delete-all').remove();
+}
 
 const appendCart = () => {
-    products = JSON.parse(localStorage.getItem('cart'));
-    products.forEach(el => {
+    myCart = JSON.parse(localStorage.getItem('cart'));
+    myCart.forEach(el => {
         let myGrid = document.querySelector('.my-grid');
         let card = document.createElement('div');
         let img = document.createElement('img');
         let cardBody = document.createElement('div');
         let titleContainer = document.createElement('div');
         let h5 = document.createElement('h5');
+        let price = document.createElement('span');
         let btnToolbar = document.createElement('div');
         let group = document.createElement('span');
         let btnIncrease = document.createElement('button');
         let number = document.createElement('input');
         let btnDecrease = document.createElement('button');
-        let btnDeleteEl = document.createElement('button');
+        let btnDeleteItem = document.createElement('button');
+        // styles and attributes
         card.classList.add('card');
+        card.id = el.product_id;
         img.src = '../assets/products' + el.src;
         img.classList.add('card-img-top');
         img.alt = el.product_name;
         cardBody.classList.add('add-to-cart', 'card-body', 'flex-column', 'd-flex', 'justify-content-between');
         titleContainer.classList.add('mb-3');
-        h5.id = el.product_id;
         h5.classList.add('card-title', 'product-name');
         h5.innerText = el.product_name;
+        price.classList.add('ms-3', 'price');
+        price.innerText = '₪' + el.price;
         btnToolbar.classList.add('btn-toolbar');
         group.classList.add('btn-group', 'border', 'rounded', 'border-1', 'me-3');
         btnIncrease.id = 'increase-quantity';
         btnIncrease.classList.add('btn');
-        btnIncrease.innerText = '-';
+        btnIncrease.innerText = '+';
         number.readOnly = true;
         number.id = 'quantity';
         number.classList.add('border', 'border-1', 'border-top-0', 'border-bottom-0', 'reset-me');
@@ -53,11 +74,17 @@ const appendCart = () => {
         number.name = 'quantity';
         btnDecrease.id = 'decrease-quantity';
         btnDecrease.classList.add('btn');
-        btnDecrease.innerText = '+';
-        btnDeleteEl.classList.add('btn', 'btn-info', 'text-nowrap', 'rounded-pill', 'px-4');
-        btnDeleteEl.innerText = 'Delete';
+        btnDecrease.innerText = '-';
+        btnDeleteItem.classList.add('btn', 'btn-info', 'text-nowrap', 'rounded-pill', 'px-4');
+        btnDeleteItem.innerText = 'Delete';
+        // event listeners
+        btnIncrease.addEventListener('click', increaseQuant);
+        btnDecrease.addEventListener('click', decreaseQuant);
+        btnDeleteItem.addEventListener('click', deleteItem);
+        //appends
         group.append(btnIncrease, number, btnDecrease);
-        btnToolbar.append(group, btnDeleteEl);
+        btnToolbar.append(group, btnDeleteItem);
+        h5.append(price);
         titleContainer.append(h5);
         cardBody.append(titleContainer, btnToolbar);
         card.append(img, cardBody);

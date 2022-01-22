@@ -6,9 +6,10 @@ let cart;
 
 //product class to save to the cart
 class Product {
-    constructor(id, name, quantity, src) {
+    constructor(id, name, price, quantity, src) {
         this.product_id = id;
         this.product_name = name;
+        this.price = price;
         this.quantity = quantity;
         this.src = src;
     }
@@ -30,7 +31,7 @@ const decreaseQuant = function () {
     numBox.value = num;
 }
 
-//checks if we have already tasks in the local storage, if not - creates a new cart array
+//checks if we have smth in the local storage, if not - creates a new cart array
 const checkLocalStorage = () => {
     if (localStorage.getItem('cart') != null) {
         cart = JSON.parse(localStorage.getItem('cart'));
@@ -47,14 +48,16 @@ const checkLocalStorage = () => {
 
 // saves product to a local storage
 const addToLocalCart = function (e) {
-    e.preventDefault();
-    let str = this.children[0].children[0].innerText;
+    e.preventDefault();;
+    let nameWithPrice = this.children[0].children[0].innerText;
     let id = this.children[0].children[0].id;
-    let ind = str.indexOf('₪');
+    let indx = nameWithPrice.indexOf('₪');
+    let productName = nameWithPrice.slice(0, indx);
+    let price = nameWithPrice.slice(indx + 1);
     let quant = this.lastElementChild.children[0].children[1].value;
     let fullSrc = this.previousElementSibling.src;
     let indexSrc = fullSrc.indexOf('/id');
-    let product = new Product(id, str.slice(0, ind), quant, fullSrc.slice(indexSrc));
+    let product = new Product(id, productName, price, quant, fullSrc.slice(indexSrc));
     checkLocalStorage();
     cart.push(product);
     // resetInputs();
