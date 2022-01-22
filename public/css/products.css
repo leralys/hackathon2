@@ -12,3 +12,13 @@
 .card-body a.btn {
   align-self: flex-start;
 }
+
+span.btn-group #quantity {
+  width: 50px;
+  text-align: center;
+  padding-left: 13px;
+}
+
+.card-title .price {
+  color: var(--color-pink-dark);
+}

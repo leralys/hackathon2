@@ -3,16 +3,24 @@
     <% products.forEach(el=>{ %>
     <div class="card">
       <img src="/assets/products/id<%=el.product_id%>.jpeg" class="card-img-top" alt="<%=el.product_name%>">
-      <div class="card-body flex-column d-flex justify-content-between">
+      <form class="add-to-cart card-body flex-column d-flex justify-content-between">
         <div class="mb-3">
-          <h5 class="card-title"><%=el.product_name%><span class="ms-3">&#8362;<%=el.price%></span></h5>
+          <h5 class="card-title product-name"><%=el.product_name%><span class="ms-3 price">&#8362;<%=el.price%></span></h5>
           <p class="card-text"><%=el.description%></p>
         </div>
-        <a href="#" class="btn btn-info text-nowrap rounded-pill">Add to a cart</a>
-      </div>
+        <div class="btn-toolbar" role="toolbar">
+          <span class="btn-group border rounded border-1 me-3" role="group">
+            <button id="increase-quantity" type="button" class="btn">&#43</button>
+            <input readonly id="quantity" class="border border-1 border-top-0 border-bottom-0 reset-me" type="number" name="quantity" value="1" min="1">
+            <button id="decrease-quantity" type="button" class="btn">&#45</button>
+          </span>
+          <button type="submit" class="btn btn-info text-nowrap rounded-pill">Add to a cart</a>
+        </div>
+      </form>
     </div>
     <% }) %>
   </div>
 </div>
 
-<!-- style="width: 18rem; -->
+
+<script src="js/shop.js"></script>

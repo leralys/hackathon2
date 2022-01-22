@@ -47,3 +47,6 @@ button.btn-success:hover {
   outline: none;
   box-shadow: none;
 }
+button.btn-info:focus {
+  box-shadow: none;
+}
