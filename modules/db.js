@@ -38,9 +38,8 @@ const saveUser = async (name, email, hashedP) => {
 const getUser = (email) => {
     return db('customer')
         .where({ email: email })
-        .select('email', 'hashed_pass');
+        .select('customer_id', 'email', 'hashed_pass', 'customer_name');
 }
-
 
 module.exports = {
     getProducts,

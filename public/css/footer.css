@@ -1,0 +1,8 @@
+svg.icon,
+.my-footer {
+  color: var(--color-white);
+}
+.my-footer {
+  height: 100px;
+  background-color: var(--color-green-dark);
+}

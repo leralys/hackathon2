@@ -5,6 +5,7 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const env = require('dotenv');
 const path = require('path');
+const session = require('express-session');
 
 // DB
 const DB = require('./modules/db');
@@ -15,37 +16,42 @@ const app = express();
 env.config();
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
+app.use(session({
+    secret: 'notagoodsecret',
+    resave: true,
+    saveUninitialized: true
+}));
 
 // Set templating engine
 app.use(expressLayouts);
 app.set('layout', './layouts/mainLayout');
 // Set view engine
-// app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 
 // Static files
-// app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use('/css', express.static(path.join(__dirname, 'public/css')))
-// app.use('/js', express.static(path.join(__dirname, 'public/js')))
 
 // API
-app.get('/api/test', async (req, res) => {
-    try {
-        const data = await test.getProducts();
-        res.json(data);
-    } catch (e) {
-        console.log(e);
-    }
+// app.get('/api/test', async (req, res) => {
+//     try {
+//         const data = await test.getProducts();
+//         res.json(data);
+//     } catch (e) {
+//         console.log(e);
+//     }
 
-});
+// });
 
 
-// Navigation
+// ROUTS
 
 //root
 app.get('/', (req, res) => {
-    res.render('index');
+    if (!req.session.user_id) {
+        res.render('index', { topButton: 'View account' });
+    } else {
+        res.render('index', { topButton: 'Login' });
+    }
 });
 
 //shop
@@ -92,13 +98,42 @@ app.get('/login', (req, res) => {
 });
 app.post('/login', async (req, res) => {
     const user = await DB.getUser(req.body.email);
-    // user[0].hashed_pass;
     // compare hased password with the user input
     bcrypt.compare(req.body.password, user[0].hashed_pass).then(function (result) {
-        result ? res.redirect('/products') : res.send('email/password wrong')
+        if (result) {
+            req.session.user_id = user[0].customer_id;
+            res.redirect('/products');
+        } else {
+            res.send('email/password wrong');
+        }
     });
 });
 
+// logout
+app.post('/logout', (req, res) => {
+    req.session.user_id = null;
+    res.redirect('/');
+});
+
+//cart
+app.get('/cart', (req, res) => {
+    res.send('cart');
+});
+
+//secret
+app.get('/secret', (req, res) => {
+    if (!req.session.user_id) {
+        res.redirect('/login');
+    } else {
+        res.render('secret', { layout: './layouts/backgroundColor' });
+    }
+});
+app.post('/secret', (req, res) => {
+    if (!req.session.user_id) {
+        res.redirect('/login');
+    }
+    res.send('hey this is my account');
+})
 
 
 
@@ -106,4 +141,3 @@ app.post('/login', async (req, res) => {
 app.listen(process.env.PORT, () => {
     console.log(`listening on port ${process.env.PORT}`)
 })
-
