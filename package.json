@@ -1,0 +1,36 @@
+{
+  "name": "hachathon2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mockdb.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leralys/Hackathon2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leralys/Hackathon2/issues"
+  },
+  "homepage": "https://github.com/leralys/Hackathon2#readme",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^14.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.17.2",
+    "knex": "^1.0.1",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

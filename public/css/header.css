@@ -1,0 +1,12 @@
+nav.navbar-light {
+  background: var(--color-white);
+}
+div.container-fluid a.navbar-brand {
+  color: var(--color-pink-dark);
+}
+.cart-icon {
+  color: var(--color-pink-middle);
+}
+.cart-icon:hover {
+  color: var(--color-pink-dark);
+}

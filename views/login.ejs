@@ -1,0 +1,30 @@
+<h1><%- title %></h1>
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-3"></div>
+    <div class="col-md-6">
+      <form action="/login" method="POST" class="form p-5 border border-secondary border-2">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" required autocomplete="off" placeholder="email">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" required autocomplete="off" placeholder="password">
+        </div>
+        <div class="d-grid gap-2">
+          <button id="login" class="btn btn-success text-nowrap rounded-pill" type="submit">Login</button>
+          <!-- <a href="/register" id="register" class="btn btn-outline-info text-nowrap rounded-pill" role="button">Back to login</a>
+          <a href="/login" id="login" class="btn btn-outline-info text-nowrap rounded-pill" role="button">Login</a> -->
+          <a href="/register" class="btn btn-outline-info text-nowrap rounded-pill" role="button">No account? Register</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- <script>
+  let login = document.querySelector('#login');
+  login.addEventListener('click', () => {
+    console.log('click');
+  })
+</script> -->
