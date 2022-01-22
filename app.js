@@ -125,7 +125,7 @@ app.get('/secret', (req, res) => {
     if (!req.session.user_id) {
         res.redirect('/login');
     } else {
-        res.render('secret', { layout: './layouts/backgroundColor', topButton: 'View account' });
+        res.render('secret', { layout: './layouts/backgroundColor', topButton: 'Log out' });
     }
 });
 app.post('/secret', (req, res) => {

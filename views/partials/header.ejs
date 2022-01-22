@@ -26,8 +26,12 @@
         </a>
         <% if (topButton == 'View account') { %>
         <a href="/secret" class="btn btn-outline-info mx-3 text-nowrap rounded-pill px-4" role="button"><%- topButton %></a>
-        <% } else {%>
+        <% } else if (topButton == 'Login'){%>
         <a href="/login" class="btn btn-outline-info mx-3 text-nowrap rounded-pill px-4" role="button"><%- topButton %></a>
+        <% } else {%>
+        <form action="/logout" method="POST">
+          <button type="submit" class="btn btn-outline-info mx-3 text-nowrap rounded-pill px-4" role="button"><%- topButton %></button>
+        </form>
         <% } %>
       </div>
     </div>
