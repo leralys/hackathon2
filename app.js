@@ -51,7 +51,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
     let btnVal;
     req.session.user_id ? btnVal = 'View account' : btnVal = 'Login';
-    res.render('index', { topButton: btnVal, id: req.session.user_id });
+    res.render('index', { topButton: btnVal, id: req.session.user_id, layout: './layouts/backgroundColor' });
 });
 
 //shop
