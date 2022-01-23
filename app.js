@@ -51,7 +51,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
     let btnVal;
     req.session.user_id ? btnVal = 'View account' : btnVal = 'Login';
-    res.render('index', { topButton: btnVal });
+    res.render('index', { topButton: btnVal, id: req.session.user_id });
 });
 
 //shop
@@ -60,7 +60,7 @@ app.get('/products', async (req, res) => {
         const products = await DB.getProducts();
         let btnVal;
         req.session.user_id ? btnVal = 'View account' : btnVal = 'Login';
-        res.render('products', { products: products, topButton: btnVal });
+        res.render('products', { products: products, topButton: btnVal, id: req.session.user_id });
     } catch (e) {
         console.log(e);
     }
@@ -122,7 +122,7 @@ app.post('/logout', (req, res) => {
 app.get('/cart', (req, res) => {
     let btnVal;
     req.session.user_id ? btnVal = 'View account' : btnVal = 'Login';
-    res.render('cart', { topButton: btnVal });
+    res.render('cart', { topButton: btnVal, id: req.session.user_id });
 });
 
 //secret
