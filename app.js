@@ -33,17 +33,6 @@ app.set('view engine', 'ejs');
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// API
-// app.get('/api/test', async (req, res) => {
-//     try {
-//         const data = await test.getProducts();
-//         res.json(data);
-//     } catch (e) {
-//         console.log(e);
-//     }
-
-// });
-
 
 // ROUTS
 
@@ -51,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
     let btnVal;
     req.session.user_id ? btnVal = 'View account' : btnVal = 'Login';
-    res.render('index', { topButton: btnVal, id: req.session.user_id, layout: './layouts/backgroundColor' });
+    res.render('index', { topButton: btnVal, id: req.session.user_id });
 });
 
 //shop

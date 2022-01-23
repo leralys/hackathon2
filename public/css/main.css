@@ -62,7 +62,3 @@ a.btn-info:focus {
   outline: none;
   box-shadow: none;
 }
-
-.carousel-image {
-  transform: translateY(-200px);
-}
