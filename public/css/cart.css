@@ -1,0 +1,16 @@
+h1 {
+  color: var(--color-green-dark);
+  text-align: left;
+}
+form.form {
+  background-color: var(--color-white);
+  height: 70vh;
+  width: 100%;
+}
+form.form {
+  text-align: right;
+}
+#delete-all {
+  margin-left: 100px;
+  margin-bottom: 10px;
+}

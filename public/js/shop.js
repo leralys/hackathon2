@@ -40,12 +40,6 @@ const checkLocalStorage = () => {
     }
 }
 
-// resets inputs
-// function resetInputs() {
-//     const clearInputs = document.querySelectorAll('.reset-me');
-//     clearInputs.forEach(el => el.value = '1');
-// }
-
 // saves product to a local storage
 const addToLocalCart = function (e) {
     e.preventDefault();;

@@ -1,16 +1,16 @@
-<form action="/secret" method="POST" id="cart-body">
+<form action="/secret/<%-id%>/checkout" class="form p-5 mb-4" method="POST" id="cart-body">
   <div>
     <h1 style="padding-left: 50px;">Your cart is empty =(</h1>
     <span><input readonly id="total" class="border border-1 w-25" type="text" name="total" value=""></span>
-    <button type="button" class="btn btn-success full text-nowrap rounded-pill px-4">Checkout</button>
+    <button type="button" id="checkout" class="btn btn-success text-nowrap rounded-pill px-4">Checkout</button>
   </div>
-
-  <div class=" container-fluid">
-    <div class="my-grid">
-    </div>
-  </div>
-
 </form>
+<div class=" container-fluid">
+  <div class="my-grid">
+  </div>
+</div>
+
+
 <button id="delete-all" class="btn btn-outline-info text-nowrap rounded-pill" type="submit">Clear cart</button>
 
 

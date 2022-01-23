@@ -141,8 +141,9 @@ app.post('/secret/:user', (req, res) => {
     }
     res.redirect('/secret/:user');
 })
-
-
+app.post('/secret/:user/checkout', (req, res) => {
+    res.send('Thank you for your order', { id: req.session.user_id });
+});
 
 // Server
 app.listen(process.env.PORT, () => {

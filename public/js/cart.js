@@ -1,4 +1,11 @@
 let myCart;
+const h1 = document.querySelector('h1');
+const deleteAllBtn = document.querySelector('#delete-all');
+const total = document.querySelector('#total');
+const checkout = document.querySelector('#checkout');
+const badgeSymbol = document.querySelector('#cart-not-empty');
+const form = document.querySelector('.form');
+
 
 // increase number of products
 const increaseQuant = function () {
@@ -27,10 +34,6 @@ function deleteItem() {
     if (document.querySelectorAll('.card').length == 0) {
         localStorage.clear();
         checkLocalStorage();
-        let h1 = document.createElement('h1');
-        document.querySelector('h1').style.display = 'block';
-        makeBody();
-        document.body.append(h1);
     }
 }
 
@@ -104,24 +107,34 @@ const appendCart = () => {
     });
 }
 
-const makeBody = () => {
-    document.body.style.display = 'flex';
-    document.body.style.width = '100%';
-    document.body.style.height = '120vh';
-    document.body.style.flexDirection = 'column';
-    document.body.style.justifyContent = 'space-between';
+// no need for checkout button if the cart is empty
+function hideBtns() {
+    total.style.display = 'none';
+    checkout.style.display = 'none';
+    deleteAllBtn.style.display = 'none';
+    badgeSymbol.style.visibility = 'hidden';
+    form.style.height = '70vh'
+}
+
+// show checkout button and delete all if we have smth in the cart
+function showBtns() {
+    h1.style.display = 'none';
+    total.style.display = 'inline-block';
+    checkout.style.display = 'block';
+    deleteAllBtn.style.display = 'block';
+    badgeSymbol.style.visibility = 'visible';
+    form.style.height = '0px'
 }
 
 
 // initialization - show cart if we have it
 const checkLocalStorage = () => {
     if (localStorage.getItem('cart') == null) {
-        makeBody();
-        document.querySelector('#cart-not-empty').style.display = 'none';
+        hideBtns();
         return;
     } else {
-        document.querySelector('h1').style.display = 'none';
         appendCart();
+        showBtns();
     }
 };
 // start
