@@ -2,10 +2,12 @@ let myCart;
 
 // increase number of products
 const increaseQuant = function () {
+    let sum;
     let numBox = this.nextElementSibling;
     let num = Number(numBox.value);
     num++;
     numBox.value = num;
+    myCart = JSON.parse(localStorage.getItem('cart'));
 }
 // decrease number of products
 const decreaseQuant = function () {
@@ -22,6 +24,14 @@ function deleteItem() {
     myCart = myCart.filter(obj => obj.product_id != card.id);
     card.remove();
     localStorage.setItem('cart', JSON.stringify(myCart));
+    if (document.querySelectorAll('.card').length == 0) {
+        localStorage.clear();
+        checkLocalStorage();
+        let h1 = document.createElement('h1');
+        document.querySelector('h1').style.display = 'block';
+        makeBody();
+        document.body.append(h1);
+    }
 }
 
 //deletes all tasks
@@ -29,7 +39,8 @@ function deleteAll() {
     let productCards = document.querySelectorAll('.card');
     productCards.forEach(el => el.remove());
     localStorage.clear();
-    document.querySelector('#delete-all').remove();
+    document.querySelector('#delete-all-btn').remove();
+    checkLocalStorage();
 }
 
 const appendCart = () => {
@@ -59,7 +70,7 @@ const appendCart = () => {
         h5.classList.add('card-title', 'product-name');
         h5.innerText = el.product_name;
         price.classList.add('ms-3', 'price');
-        price.innerText = '₪' + el.price;
+        price.innerText = `₪${el.price}/psc`;
         btnToolbar.classList.add('btn-toolbar');
         group.classList.add('btn-group', 'border', 'rounded', 'border-1', 'me-3');
         btnIncrease.id = 'increase-quantity';
@@ -92,20 +103,25 @@ const appendCart = () => {
     });
 }
 
-
+const makeBody = () => {
+    document.body.style.display = 'flex';
+    document.body.style.width = '100%';
+    document.body.style.height = '120vh';
+    document.body.style.flexDirection = 'column';
+    document.body.style.justifyContent = 'space-between';
+}
 
 
 // initialization - show cart if we have it
-const checkLocalStorage = (() => {
+const checkLocalStorage = () => {
     if (localStorage.getItem('cart') == null) {
-        document.body.style.display = 'flex';
-        document.body.style.width = '100%';
-        document.body.style.height = '100vh';
-        document.body.style.flexDirection = 'column';
-        document.body.style.justifyContent = 'space-between';
+        makeBody();
+        document.querySelector('#cart-not-empty').style.display = 'none';
         return;
     } else {
-        document.querySelector('h1').remove();
+        document.querySelector('h1').style.display = 'none';
         appendCart();
     }
-})();
+};
+
+checkLocalStorage();

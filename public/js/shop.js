@@ -60,6 +60,7 @@ const addToLocalCart = function (e) {
     let product = new Product(id, productName, price, quant, fullSrc.slice(indexSrc));
     checkLocalStorage();
     cart.push(product);
+    document.querySelector('#cart-not-empty').style.display = 'block';
     // resetInputs();
     localStorage.setItem('cart', JSON.stringify(cart));
 };
