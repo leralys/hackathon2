@@ -27,12 +27,7 @@ a.btn-outline-info:hover {
   color: var(--color-white);
   border: 2px solid var(--color-green-dark);
 }
-form .btn-outline-info:hover,
-button.btn-outline-info:focus,
-a.btn-outline-info:focus {
-  outline: none;
-  box-shadow: none;
-}
+
 a.btn-success,
 button.btn-success {
   color: var(--color-pink-dark);
@@ -45,11 +40,25 @@ button.btn-success:hover {
   border: 2px solid var(--color-pink-middle);
   color: var(--color-white);
 }
-a.btn-success:hover,
-button.btn-success:hover {
-  outline: none;
-  box-shadow: none;
+
+button.btn.btn-success.full {
+  background-color: var(--color-pink-dark);
+  border: 2px solid var(--color-pink-dark);
+  color: var(--color-white);
 }
-button.btn-info:focus {
+button.btn.btn-success.full:hover {
+  background-color: var(--color-pink-middle);
+  border: 2px solid var(--color-pink-middle);
+  color: var(--color-white);
+}
+
+form .btn-outline-info:focus,
+button.btn-outline-info:focus,
+a.btn-outline-info:focus,
+a.btn-success:focus,
+button.btn-success:focus,
+button.btn-info:focus,
+a.btn-info:focus {
+  outline: none;
   box-shadow: none;
 }

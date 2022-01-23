@@ -26,7 +26,7 @@
           <span id="cart-not-empty" class="position-absolute top-20 start-80 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
         </a>
         <% if (topButton == 'View account') { %>
-        <a href="/secret" class="btn btn-outline-info mx-3 text-nowrap rounded-pill px-4" role="button"><%- topButton %></a>
+        <a href="/secret/<%- id%>" class="btn btn-outline-info mx-3 text-nowrap rounded-pill px-4" role="button"><%- topButton %></a>
         <% } else if (topButton == 'Login'){%>
         <a href="/login" class="btn btn-outline-info mx-3 text-nowrap rounded-pill px-4" role="button"><%- topButton %></a>
         <% } else {%>

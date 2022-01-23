@@ -1,9 +1,18 @@
-<h1 style="padding-left: 50px;">Your cart is empty =(</h1>
-
-<div class="container-fluid">
-  <div class="my-grid">
+<form action="/secret" method="POST" id="cart-body">
+  <div>
+    <h1 style="padding-left: 50px;">Your cart is empty =(</h1>
+    <span><input readonly id="total" class="border border-1 w-25" type="text" name="total" value=""></span>
+    <button type="button" class="btn btn-success full text-nowrap rounded-pill px-4">Checkout</button>
   </div>
-</div>
+
+  <div class=" container-fluid">
+    <div class="my-grid">
+    </div>
+  </div>
+
+</form>
+<button id="delete-all" class="btn btn-outline-info text-nowrap rounded-pill" type="submit">Clear cart</button>
+
 
 
 <script src="/js/cart.js"></script>

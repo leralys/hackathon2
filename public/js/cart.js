@@ -34,7 +34,7 @@ function deleteItem() {
     }
 }
 
-//deletes all tasks
+//delete everything from the cart
 function deleteAll() {
     let productCards = document.querySelectorAll('.card');
     productCards.forEach(el => el.remove());
@@ -43,6 +43,7 @@ function deleteAll() {
     checkLocalStorage();
 }
 
+// takes everything from the cart and appends products to the page with the same layout as in the /products 
 const appendCart = () => {
     myCart = JSON.parse(localStorage.getItem('cart'));
     myCart.forEach(el => {
@@ -123,5 +124,5 @@ const checkLocalStorage = () => {
         appendCart();
     }
 };
-
+// start
 checkLocalStorage();

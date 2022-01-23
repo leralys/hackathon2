@@ -100,11 +100,12 @@ app.get('/login', (req, res) => {
 });
 app.post('/login', async (req, res) => {
     const user = await DB.getUser(req.body.email);
+    let btnVal;
     // compare hased password with the user input
     bcrypt.compare(req.body.password, user[0].hashed_pass).then(function (result) {
         if (result) {
             req.session.user_id = user[0].customer_id;
-            res.redirect('/products');
+            res.redirect(`/secret/${req.session.user_id}`);
         } else {
             res.send('email/password wrong');
         }
@@ -125,18 +126,20 @@ app.get('/cart', (req, res) => {
 });
 
 //secret
-app.get('/secret', (req, res) => {
+app.get('/secret/:user', (req, res) => {
     if (!req.session.user_id) {
         res.redirect('/login');
     } else {
-        res.render('secret', { layout: './layouts/backgroundColor', topButton: 'Log out' });
+        if (req.params.user == req.session.user_id) {
+            res.render('secret', { layout: './layouts/backgroundColor', topButton: 'Log out' });
+        }
     }
 });
-app.post('/secret', (req, res) => {
+app.post('/secret/:user', (req, res) => {
     if (!req.session.user_id) {
         res.redirect('/login');
     }
-    res.send('hey this is my account');
+    res.redirect('/secret/:user');
 })
 
 
